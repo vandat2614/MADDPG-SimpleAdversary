@@ -30,8 +30,9 @@ class Agent:
         actions = self.actor.forward(state) # tensor (1, 5)
 
         # tính noise
-        min_v = (1 - actions).min()
-        noise = (T.rand(self.n_actions) * min_v).to(self.actor.device)
+        min_v = (1 - actions).min().t
+        noise = (T.rand(self.n_actions, device=self.actor.device) * min_v)
+        # noise = (T.rand(self.n_actions) * min_v).to(self.actor.device)
 
         action = actions + noise
         return action.detach().cpu().numpy()[0]
