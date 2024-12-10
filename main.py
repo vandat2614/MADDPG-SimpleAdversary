@@ -86,11 +86,12 @@ if __name__ == '__main__':
 
         score_history.append(score)
         avg_score = np.mean(score_history[-100:])
+        print(f'Episode: {i+1} - score: {score}')
         if not evaluate:
 
             if (avg_score > best_score) and (i > PRINT_INTERVAL):
-                print(" avg_score, best_score", avg_score, best_score)
+                # print(" avg_score, best_score", avg_score, best_score)
                 maddpg_agents.save_checkpoint() #!
                 best_score = avg_score
-        if i % PRINT_INTERVAL == 0 and i > 0:
-            print('episode', i, 'average score {:.1f}'.format(avg_score))
+        # if i % PRINT_INTERVAL == 0 and i > 0:
+            # print('episode', i, 'average score {:.1f}'.format(avg_score))
